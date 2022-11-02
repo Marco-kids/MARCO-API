@@ -1,7 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 require("dotenv").config();
-const obraRoutes = require("./routes/obra").default;
+const obraRoutes = require("./routes/obra");
 
 // settings
 const app = express();

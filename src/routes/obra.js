@@ -1,16 +1,16 @@
-import { Router } from "express";
-import obraSchema from "../models/obra";
-const obraController = require("../controllers/obra");
-
-const router = Router();
-
+/*import Router from "express";
+import obraSchema from "../models/obra.js";
+const obraController = require("../controllers/obra.js");*/
+const express = require("express");
+const obraController = require("../controllers/obra.js");
+const router = express.Router();
 
 //GET METHODS
 router.get("/obra", obraController.getAllObras());
 router.get("/obra/:id", obraController.getObra());
 
 //POST METHODS
-router.post("/obra",obraController.createObra());
+router.post("/obra",obraController.createNewObra());
 
 //DELETE METHODS
 router.delete("/obra/:id",obraController.deleteObra());
@@ -18,4 +18,4 @@ router.delete("/obra/:id",obraController.deleteObra());
 //PUT METHODS
 router.put("/obra/:id", obraController.updateObra());
 
-export default router;
+module.exports = router;

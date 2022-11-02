@@ -1,5 +1,7 @@
-import { Obra } from "../models/obra";
-import "dotenv/config";
+//import { Obra } from "../models/obra.js";
+//import "dotenv/config";
+require("dotenv").config();
+const Obra = require("../models/obra.js");
 
 let ctr = {};
 
@@ -49,6 +51,4 @@ ctr.updateObra = () => async (req, res) => {
     .catch((error) => res.json({ message: error }));
 };
 
-
-
-export default ctr;
+module.exports = ctr;
