@@ -5,7 +5,6 @@ const Obra = require("../models/obra.js");
 
 let ctr = {};
 
-  /* Get Role (Read) */
 ctr.getAllObras = () => async (req, res) => {
     try {
         Obra

@@ -10,7 +10,7 @@ router.get("/obra", obraController.getAllObras());
 router.get("/obra/:id", obraController.getObra());
 
 //POST METHODS
-router.post("/obra",obraController.createNewObra());
+router.post("/create-obra",obraController.createNewObra());
 
 //DELETE METHODS
 router.delete("/obra/:id",obraController.deleteObra());
