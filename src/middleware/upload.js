@@ -3,7 +3,7 @@ const multer = require("multer");
 const { GridFsStorage } = require("multer-gridfs-storage");
 
 var storage = new GridFsStorage({
-  url: process.env.DB_URL + process.env.DATABASE_NAME,
+  url: process.env.DB_URL,
   options: { useNewUrlParser: true, useUnifiedTopology: true },
   file: (req, file) => {
     const match = ["model/vnd.usdz+zip"];

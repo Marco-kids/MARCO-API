@@ -3,6 +3,7 @@ const obra = require("../models/obra.js");
 
 const MongoClient = require("mongodb").MongoClient;
 const GridFSBucket = require("mongodb").GridFSBucket;
+const mongoose = require("mongoose")
 
 const url = process.env.DB_URL;
 const baseUrl = process.env.IP_PC + "/api/models/";
@@ -100,10 +101,7 @@ const getListModels = async (req, res) => {
 // Descargar modelos
 const downloadModels = async (req, res) => {
   try {
-    await mongoClient.connect();
-
-    const database = mongoClient.db(process.env.DATABASE_NAME);
-    const bucket = new GridFSBucket(database, {
+    const bucket = new mongoose.mongo.GridFSBucket(mongoose.connection.db, {
       bucketName: process.env.MODELS_BUCKET,
     });
 
@@ -114,7 +112,7 @@ const downloadModels = async (req, res) => {
     });
 
     downloadStream.on("error", function (err) {
-      return res.status(404).send({ message: "Cannot download the Image!" });
+      return res.status(404).send({ message: "Cannot download the model!" });
     });
 
     downloadStream.on("end", () => {
