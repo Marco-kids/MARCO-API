@@ -1,13 +1,7 @@
 const upload = require("../middleware/upload");
 const obra = require("../models/obra.js");
-
-const MongoClient = require("mongodb").MongoClient;
-const GridFSBucket = require("mongodb").GridFSBucket;
 const mongoose = require("mongoose")
-
-const url = process.env.DB_URL;
 const baseUrl = process.env.IP_PC + "/api/models/";
-const mongoClient = new MongoClient(url);
 
 const createNewObra = async (req, res) => {
 
@@ -69,12 +63,9 @@ const uploadFiles = async (req, res) => {
 // Regresa lista de modelos 3D en USDZ
 const getListModels = async (req, res) => {
   try {
-    await mongoClient.connect();
 
-    const database = mongoClient.db(process.env.DATABASE_NAME);
-    const images = database.collection(process.env.MODELS_BUCKET + ".files");
-
-    const cursor = images.find({});
+    const images = mongoose.connection.db.collection(process.env.MODELS_BUCKET + ".files");
+    const cursor = images.find();
 
     if (await images.countDocuments() === 0) {
       return res.status(500).send({

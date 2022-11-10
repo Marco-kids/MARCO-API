@@ -11,7 +11,7 @@ ctr.getAllObras = () => async (req, res) => {
                 res.status(500).json("Error finding obras")
             }
             docs.forEach(function (doc) {
-                doc.modelo = process.env.IP_PC + "api/models/" + doc.modelo
+                doc.modelo = process.env.IP_PC + "/api/models/" + doc.modelo
             });
             res.json(docs)
         })
@@ -46,7 +46,7 @@ ctr.createNewObra = () => async (req, res) => {
     }
 };
 
-// get a obras
+// GET a obra
 ctr.getObra = () => async (req, res) => {
     obra
     .findById(req.params.id)
@@ -54,7 +54,7 @@ ctr.getObra = () => async (req, res) => {
     .catch((error) => res.json({ message: error }));
 };
 
-// delete a obras
+// DELETE a obra
 ctr.deleteObra = () => async (req, res) => {
     obra
     .remove(req.params.id)
