@@ -1,21 +1,26 @@
-/*import Router from "express";
-import obraSchema from "../models/obra.js";
-const obraController = require("../controllers/obra.js");*/
 const express = require("express");
 const obraController = require("../controllers/obra.js");
+const homeController = require("../controllers/home");
+const uploadController = require("../controllers/upload");
 const router = express.Router();
 
-//GET METHODS
+// GET METHODS
 router.get("/obra", obraController.getAllObras());
 router.get("/obra/:id", obraController.getObra());
+router.get("/home", homeController.getHome); // Upload modelos temporal
 
-//POST METHODS
+// GET TEMPORALES
+router.get('/models', uploadController.getListModels);
+router.get('/models/:name', uploadController.downloadModels);
+
+// POST METHODS
 router.post("/create-obra",obraController.createNewObra());
+router.post("/upload", uploadController.uploadFiles);
 
-//DELETE METHODS
+// DELETE METHODS
 router.delete("/obra/:id",obraController.deleteObra());
 
-//PUT METHODS
+// PUT METHODS
 router.put("/obra/:id", obraController.updateObra());
 
 module.exports = router;

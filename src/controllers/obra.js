@@ -1,13 +1,13 @@
 //import { Obra } from "../models/obra.js";
 //import "dotenv/config";
 require("dotenv").config();
-const Obra = require("../models/obra.js");
+const obra = require("../models/obra.js");
 
 let ctr = {};
 
 ctr.getAllObras = () => async (req, res) => {
     try {
-        Obra
+        obra
         .find()
         .then((data) => res.json(data))
         .catch((error) => res.json({ message: error }));
@@ -18,17 +18,33 @@ ctr.getAllObras = () => async (req, res) => {
 
 // create obra
 ctr.createNewObra = () => async (req, res) => {
-    Obra
-    .save()
-    .then((data) => res.json(data))
-    .catch((error) => res.json({ message: error }));
-    res.send("Creacion de obra");
+    console.log(req.body)
+    if(req.body.constructor === Object && Object.keys(req.body).length === 0) {
+        res.json("Empty fields")
+        return
+    }
+    try {
+        const {nombre, autor, descripcion, modelo, longitud, latitud} = req.body
+
+        const newEvent = obra({
+            nombre: nombre,
+            autor: autor,
+            descripcion: descripcion,
+            modelo: modelo,
+            longitud: longitud,
+            latitud: latitud
+        })
+
+        newEvent.save()
+        .then(res.json("success"))
+    } catch {
+        res.json("Error")
+    }
 };
-  
   
 // get a obras
 ctr.getObra = () => async (req, res) => {
-    Obra
+    obra
     .findById(id)
     .then((data) => res.json(data))
     .catch((error) => res.json({ message: error }));
@@ -36,7 +52,7 @@ ctr.getObra = () => async (req, res) => {
 
 // delete a obras
 ctr.deleteObra = () => async (req, res) => {
-    Obra
+    obra
     .remove({ _id: id })
     .then((data) => res.json(data))
     .catch((error) => res.json({ message: error }));
@@ -44,7 +60,7 @@ ctr.deleteObra = () => async (req, res) => {
 
 // update a obras
 ctr.updateObra = () => async (req, res) => {
-    Obra
+    obra
     .updateOne({ _id: id }, { $set: { name } })
     .then((data) => res.json(data))
     .catch((error) => res.json({ message: error }));
