@@ -13,10 +13,14 @@ var storage = new GridFsStorage({
       return filename;
     }
 
-    return {
+    const data = {
       bucketName: process.env.MODELS_BUCKET,
       filename: `${Date.now()}-MARCO-KIDS-${file.originalname}`
     };
+
+    req.fileName = data.filename;
+
+    return data;
   }
 });
 

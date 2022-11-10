@@ -1,18 +1,22 @@
-//import { Obra } from "../models/obra.js";
-//import "dotenv/config";
-require("dotenv").config();
 const obra = require("../models/obra.js");
+require("dotenv").config();
 
 let ctr = {};
 
+// GET all obras
 ctr.getAllObras = () => async (req, res) => {
     try {
-        obra
-        .find()
-        .then((data) => res.json(data))
-        .catch((error) => res.json({ message: error }));
-    } catch (err) {
-      return res.status(500).json(err);
+        const obras = obra.find(function(err, docs) {
+            if (err) {
+                res.status(500).json("Error finding obras")
+            }
+            docs.forEach(function (doc) {
+                doc.modelo = process.env.IP_PC + "api/models/" + doc.modelo
+            });
+            res.json(docs)
+        })
+    } catch {
+        res.status(500).json("Error finding obras")
     }
 };
 
@@ -41,11 +45,11 @@ ctr.createNewObra = () => async (req, res) => {
         res.json("Error")
     }
 };
-  
+
 // get a obras
 ctr.getObra = () => async (req, res) => {
     obra
-    .findById(id)
+    .findById(req.params.id)
     .then((data) => res.json(data))
     .catch((error) => res.json({ message: error }));
 };
@@ -53,11 +57,12 @@ ctr.getObra = () => async (req, res) => {
 // delete a obras
 ctr.deleteObra = () => async (req, res) => {
     obra
-    .remove({ _id: id })
+    .remove(req.params.id)
     .then((data) => res.json(data))
     .catch((error) => res.json({ message: error }));
 };
 
+/*
 // update a obras
 ctr.updateObra = () => async (req, res) => {
     obra
@@ -65,5 +70,6 @@ ctr.updateObra = () => async (req, res) => {
     .then((data) => res.json(data))
     .catch((error) => res.json({ message: error }));
 };
+*/
 
 module.exports = ctr;

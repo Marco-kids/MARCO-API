@@ -1,13 +1,39 @@
 const upload = require("../middleware/upload");
+const obra = require("../models/obra.js");
 
 const MongoClient = require("mongodb").MongoClient;
 const GridFSBucket = require("mongodb").GridFSBucket;
 
 const url = process.env.DB_URL;
-
 const baseUrl = process.env.IP_PC + "/api/models/";
-
 const mongoClient = new MongoClient(url);
+
+const createNewObra = async (req, res) => {
+
+  await upload(req, res);
+
+  try {
+
+    const {nombre, autor, descripcion, longitud, latitud} = req.body;
+    const modelo = req.fileName;
+
+    const newEvent = obra({
+      nombre: nombre,
+      autor: autor,
+      descripcion: descripcion,
+      modelo: modelo,
+      longitud: longitud,
+      latitud: latitud
+    })
+    newEvent
+      .save()
+      .then(res.json("success"))
+
+  } catch {
+    res.json("Error at creating object in mongoose")
+  }
+  
+}
 
 const uploadFiles = async (req, res) => {
   try {
@@ -105,4 +131,5 @@ module.exports = {
   uploadFiles,
   getListModels,
   downloadModels,
+  createNewObra
 };

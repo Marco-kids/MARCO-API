@@ -1,24 +1,25 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const routes = require("./routes/obra");
+const bodyParser = require("body-parser")
 require("dotenv").config();
 
-// settings
+// Settings
 const app = express();
 const port = process.env.PORT || 3001;
 
-//middleware
+// Middleware
 app.use(express.json());
 app.use("/api", routes);
 
-// routes
+// Routes
 app.get("/", (req, res) => {
     res.send("Welcome to MARCO KIDS API");
 });
 
 mongoose
-    .connect(process.env.DB_URL)
-    .then(() => console.log("Connected to MongodB"))
+    .connect(process.env.DB_URL + process.env.DATABASE_NAME)
+    .then(() => console.log("Connected to MongoDB"))
     .catch((error) => console.error(error));
 
 app.listen(port, () => console.log(`Running at localhost:${port}`));
