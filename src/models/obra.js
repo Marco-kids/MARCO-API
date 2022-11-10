@@ -28,8 +28,4 @@ const obraSchema = mongoose.Schema({
     },
 });
 
-obraSchema.methods.changedModelToURL = function() {
-    return process.env.IP_PC + this.modelo;
-};
-
 module.exports = mongoose.model('Obra', obraSchema);
