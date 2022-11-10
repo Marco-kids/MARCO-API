@@ -28,7 +28,7 @@ Requires `.env` file with following parameters:
 | ------------- | ------------- | ----------- | -----------|
 | READ  | GET | /api/obra | Returns JSON with all art pieces |
 | READ  | GET | /api/models | Returns JSON with all files in Bucket |
-| CREATE  | POST | /api/models | Creates an art piece (Obra) |
+| CREATE  | POST | /api/create-obra | Creates an art piece (Obra) |
 
 ## Example with endpoint: `/api/obra`
 ```json
