@@ -13,7 +13,7 @@ router.get('/models/:name', uploadController.downloadModels);
 router.post("/create-obra", uploadController.createNewObra);
 
 // DELETE METHODS
-router.delete("/obra/:id",obraController.deleteObra());
+router.delete("/obra/:id", obraController.deleteObra());
 
 // PUT METHODS
 // router.put("/obra/:id", obraController.updateObra());

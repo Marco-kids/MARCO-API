@@ -56,10 +56,13 @@ ctr.getObra = () => async (req, res) => {
 
 // DELETE a obra
 ctr.deleteObra = () => async (req, res) => {
-    obra
-    .remove(req.params.id)
-    .then((data) => res.json(data))
-    .catch((error) => res.json({ message: error }));
+
+    obra.deleteOne({ _id: req.params.id }).then(function(data) {
+        res.json(data)
+    }).catch(function(error){
+        res.json(error)
+    });
+
 };
 
 /*
