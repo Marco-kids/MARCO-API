@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require("cors")
 const routes = require("./routes/obra");
 require("dotenv").config();
 
@@ -9,6 +10,7 @@ const port = process.env.PORT || 3001;
 
 // Middleware
 app.use(express.json());
+app.use(cors());
 app.use("/api", routes);
 
 // Routes
