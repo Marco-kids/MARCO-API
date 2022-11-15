@@ -26,10 +26,11 @@ Requires `.env` file with following parameters:
 ## Routes
 | CRUD  | HTTP Verb | URL | Description |
 | ------------- | ------------- | ----------- | -----------|
-| READ  | GET | /api/obra | Returns JSON with all art pieces |
-| READ  | GET | /api/models | Returns JSON with all files in Bucket |
+| READ  | GET | /api/get-obra | Returns JSON with specific art piece by id |
+| READ  | GET | /api/all-obras | Returns JSON with all files in Bucket |
+| READ  | GET | /api/all-models | Returns JSON with all files in Bucket |
 | CREATE  | POST | /api/create-obra | Creates an art piece (Obra) |
-
+| REMOVE  | DELETE | /api/delete-obra | Creates an art piece (Obra) |
 ## Example with endpoint: `/api/obra`
 ```json
 [

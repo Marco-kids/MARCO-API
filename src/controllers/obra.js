@@ -56,8 +56,9 @@ ctr.getObra = () => async (req, res) => {
 
 // DELETE a obra
 ctr.deleteObra = () => async (req, res) => {
-
-    obra.deleteOne({ _id: req.params.id }).then(function(data) {
+    const {id} = req.body;
+    console.log(id);
+    obra.deleteOne({ _id: id }).then(function(data) {
         res.json(data)
     }).catch(function(error){
         res.json(error)
