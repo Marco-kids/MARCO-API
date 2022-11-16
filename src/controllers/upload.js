@@ -5,12 +5,16 @@ const baseUrl = process.env.IP_PC + "/api/models/";
 
 const createNewObra = async (req, res) => {
 
-  await upload(req, res);
-
+  const successUpload = await upload(req, res);
+  console.log(req.file);
   try {
 
     const {nombre, autor, descripcion, longitud, latitud} = req.body;
     const modelo = req.fileName;
+
+    if(!nombre || !autor || !descripcion || !modelo || !longitud || ! latitud){
+      return res.status(402).json("Empty fields");
+    }
 
     const newEvent = obra({
       nombre: nombre,
@@ -25,7 +29,7 @@ const createNewObra = async (req, res) => {
       .then(res.json("success"))
 
   } catch {
-    res.json("Error at creating object in mongoose")
+    return res.status(500).json("Server error");
   }
   
 }
