@@ -18,11 +18,19 @@ const obraSchema = mongoose.Schema({
         type: String,
         //required: true
     },
-    longitud: {
+    isActive: {
+        type: String,
+        //required: true
+    },
+    zona: {
         type: String,
         //required: true
     },
     latitud: {
+        type: String,
+        //required: true
+    },
+    longitud: {
         type: String,
         //required: true
     },

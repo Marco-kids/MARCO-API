@@ -16,6 +16,8 @@ ctr.getAllObras = () => async (req, res) => {
             docs.forEach(function (doc) {
                 doc.modelo = process.env.IP_PC + "/api/models/" + doc.modelo
             });
+            
+            docs.sort((a, b) => a.zona - b.zona);
             res.json(docs)
         })
     } catch {
@@ -75,7 +77,6 @@ ctr.createNewObra = () => async (req, res) => {
 ctr.uploadFiles = () => async (req, res) => {
   try {
     await upload(req, res);
-    console.log(req.files);
 
     if (req.files.length <= 0) {
       return res
