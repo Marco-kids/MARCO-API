@@ -12,4 +12,4 @@ const ARLoaction = mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('ARLoaction', ARLoaction);
+module.exports = mongoose.model('ARLocation', ARLoaction);
