@@ -12,6 +12,9 @@ const port = process.env.PORT || 3001;
 app.use(express.json());
 app.use(cors());
 app.use("/api", routes);
+app.use('/uploads', express.static('uploads'));
+
+mongoose.set('strictQuery', false);
 
 // Routes
 app.get("/", (req, res) => {
