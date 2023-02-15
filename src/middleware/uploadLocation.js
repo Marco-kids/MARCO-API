@@ -13,6 +13,4 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({storage: storage});
-// var uploadFiles = multer({ storage: storage }).array("screenshot", 10);
-// var uploadFilesMiddleware = util.promisify(uploadFiles);
 module.exports = upload;
