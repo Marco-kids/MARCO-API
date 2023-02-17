@@ -6,9 +6,15 @@ const storage = multer.diskStorage({
     cb(null, 'uploads/');
   },
   filename: function (req, file, cb) {
-    let newFileName = Date.now() + '-' + file.originalname
-    cb(null, newFileName);
-    req.fileName = newFileName;
+    if (file.fieldname === 'screenshot') {
+      let newFileName = Date.now() + '-' + file.originalname
+      cb(null, newFileName);
+      req.fileName = newFileName;
+    } else {
+      let newFileName = Date.now() + '-' + file.originalname
+      cb(null, newFileName);
+      req.fileName = newFileName;
+    }
   }
 });
 
