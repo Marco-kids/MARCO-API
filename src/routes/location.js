@@ -9,4 +9,7 @@ router.get('/locations', arLocationController.getAllARLocations());
 // POST METHODS
 router.post("/create-location", upload.fields([{name: 'screenshot', maxCount: 1}, {name: 'ARWorldMap', maxCount: 1}]), arLocationController.createNewARLocation());
 
+// DELETE METHODS
+router.delete("/delete-locations", arLocationController.deleteAllLocations());
+
 module.exports = router;

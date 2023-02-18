@@ -42,4 +42,14 @@ ctr.getAllARLocations = () => async (req, res) => {
     }
 }
 
+ctr.deleteAllLocations = () => async (req, res) => {
+    location.deleteMany({}, function(err, docs) {
+        if (err) {
+          res.status(500).json(err)
+        } else {
+            res.json(docs)
+        }
+    });
+}
+
 module.exports = ctr
