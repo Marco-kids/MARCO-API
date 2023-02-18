@@ -1,7 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors")
-const routes = require("./routes/obra");
+const routesObra = require("./routes/obra");
+const routesLocation = require("./routes/location");
 require("dotenv").config();
 
 // Settings
@@ -11,7 +12,8 @@ const port = process.env.PORT || 3001;
 // Middleware
 app.use(express.json());
 app.use(cors());
-app.use("/api", routes);
+app.use("/api", routesObra);
+app.use("/api", routesLocation);
 app.use('/uploads', express.static('uploads'));
 
 mongoose.set('strictQuery', false);

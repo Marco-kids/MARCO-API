@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const ARLoaction = mongoose.Schema({
+const location = mongoose.Schema({
     nombre: {
         type: String,
     },
@@ -12,4 +12,4 @@ const ARLoaction = mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('ARLocation', ARLoaction);
+module.exports = mongoose.model('location', location);
