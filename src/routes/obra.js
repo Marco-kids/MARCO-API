@@ -1,6 +1,7 @@
 const express = require("express");
 const obraController = require("../controllers/obra.js");
 const uploadController = require("../controllers/upload");
+const upload = require("../middleware/uploadLocation");
 const router = express.Router();
 
 // GET METHODS
