@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const cors = require("cors")
 const routesObra = require("./routes/obra");
 const routesLocation = require("./routes/location");
+const routesMuseo = require("./routes/museo");
 require("dotenv").config();
 
 // Settings
@@ -15,6 +16,7 @@ app.use(cors());
 app.use("/api", routesObra);
 app.use("/api", routesLocation);
 app.use('/uploads', express.static('uploads'));
+app.use('/api', routesMuseo)
 
 mongoose.set('strictQuery', false);
 
