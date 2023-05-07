@@ -1,6 +1,7 @@
 const Museo = require("../models/museo.js");
 require("dotenv").config();
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
+const obra = require("../models/obra.js");
 
 ctr = {}
 
@@ -8,7 +9,7 @@ ctr = {}
 ctr.listMuseo = () => async (req, res) => {
   try {
       const museos = await Museo.find().populate("locations").populate("obras")
-      res.status(201).json(museos)
+      res.status(200).json(museos)
   } catch(error) {
       res.status(500).json({message: error.message})
   }
@@ -18,7 +19,7 @@ ctr.listMuseo = () => async (req, res) => {
 ctr.getActiveMuseo = () => async (req, res) => {
   try {
       const museo = await Museo.findOne({ isActive: true }).populate("locations").populate("obras")
-      res.status(201).json(museo)
+      res.status(200).json(museo)
   } catch(error) {
       res.status(500).json({message: error.message})
   }
@@ -47,7 +48,39 @@ ctr.setActiveMuseo = () => async (req, res) => {
   try {
     await Museo.updateMany({}, { $set: { isActive: false } }); // set all to false
     await Museo.updateOne({ _id: id }, { $set: { isActive: true } }); // set one to true
-    res.status(201).json({message : "Activated"});
+    res.status(200).json({message : "Activated"});
+  } catch (error) {
+    res.status(500).json({ message: error.message })
+  }
+}
+
+ctr.deleteMuseo = async (req, res) => {
+  const id = req.params.id
+  try {
+    const museo = await Museo.deleteOne({ _id: id });
+    res.status(200).json(museo)
+  } catch (error) {
+    res.status(500).json({ message: error.message })
+  }
+}
+
+ctr.updateObras = async (req, res) => {
+  const id = req.params.id
+  const obras = req.body.obras
+  try {
+    const update = await Museo.updateOne({ _id: id }, { $set: { obras: obras } }); // set one to true
+    res.status(200).json(update);
+  } catch (error) {
+    res.status(500).json({ message: error.message })
+  }
+}
+
+ctr.updateLocations = async (req, res) => {
+  const id = req.params.id
+  const locations = req.body.locations
+  try {
+    const update = await Museo.updateOne({ _id: id }, { $set: { locations: locations } }); // set one to true
+    res.status(200).json(update);
   } catch (error) {
     res.status(500).json({ message: error.message })
   }

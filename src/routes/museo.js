@@ -11,8 +11,10 @@ router.post("/museo", museoController.createNewMuseo());
 
 // PUT METHODS
 router.put("/museo/activate/:id", museoController.setActiveMuseo());
+router.put("/museo/obras/:id", museoController.updateObras);
+router.put("/museo/locations/:id", museoController.updateLocations);
 
 // DELETE METHODS
-// router.delete("/delete-locations", );
+router.delete("/museo/:id", museoController.deleteMuseo);
 
 module.exports = router;
