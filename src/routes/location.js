@@ -11,5 +11,6 @@ router.post("/create-location", upload.fields([{name: 'screenshot', maxCount: 1}
 
 // DELETE METHODS
 router.delete("/delete-locations", arLocationController.deleteAllLocations());
+router.delete("/locations/:id", arLocationController.deleteOneLocations)
 
 module.exports = router;
