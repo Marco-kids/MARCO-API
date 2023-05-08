@@ -21,7 +21,7 @@ ctr.getAllObras = () => async (req, res) => {
 
 // GET a obra
 ctr.getObra = () => async (req, res) => {
-    obra
+  obra
     .findById(req.params.id)
     .then((data) => res.json(data))
     .catch((error) => res.json({ message: error }));
@@ -29,13 +29,13 @@ ctr.getObra = () => async (req, res) => {
 
 // DELETE a obra
 ctr.deleteObra = () => async (req, res) => {
-    const { id } = req.params;
-    //console.log(req.body);
-    obra.deleteOne({ _id: id }).then(function(data) {
-        res.json(data)
-    }).catch(function(error){
-        res.json(error)
-    });
+  const { id } = req.params;
+  //console.log(req.body);
+  obra.deleteOne({ _id: id }).then(function (data) {
+    res.json(data)
+  }).catch(function (error) {
+    res.json(error)
+  });
 };
 
 ctr.createNewObra = () => async (req, res) => {
@@ -43,10 +43,10 @@ ctr.createNewObra = () => async (req, res) => {
   await upload(req, res);
   try {
 
-    const {nombre, autor, descripcion, longitud, latitud} = req.body;
+    const { nombre, autor, descripcion, longitud, latitud, zona } = req.body;
     const modelo = req.fileName;
 
-    if(!nombre || !autor || !descripcion || !modelo || !longitud || ! latitud){
+    if (!nombre || !autor || !descripcion || !modelo || !zona) {
       return res.status(402).json("Empty fields");
     }
 
@@ -55,8 +55,7 @@ ctr.createNewObra = () => async (req, res) => {
       autor: autor,
       descripcion: descripcion,
       modelo: modelo,
-      longitud: longitud,
-      latitud: latitud
+      zona: zona
     })
     newEvent
       .save()
@@ -65,7 +64,7 @@ ctr.createNewObra = () => async (req, res) => {
   } catch {
     return res.status(500).json("Server error");
   }
-  
+
 }
 
 ctr.uploadFiles = () => async (req, res) => {
@@ -153,15 +152,28 @@ ctr.downloadModels = () => async (req, res) => {
   }
 };
 
-/*
+
 // update a obras
 ctr.updateObra = () => async (req, res) => {
-    obra
-    .updateOne({ _id: id }, { $set: { name } })
-    .then((data) => res.json(data))
-    .catch((error) => res.json({ message: error }));
+  try {
+    const { id, field, value } = req.body;
+
+    const newEvent =
+      obra
+        .updateOne({ "_id": id }, { $set: { [field] : value } })
+        // .then((data) => res.json(data))
+        .catch((error) => res.json({ message: error }));
+
+    newEvent
+      .save()
+      .then(res.json("Success"))
+
+  } catch {
+    return res.status(500).json("Server error");
+  }
+
 };
-*/
+
 
 /*module.exports = {
     uploadFiles,

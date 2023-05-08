@@ -17,6 +17,6 @@ router.post("/create-obra", obraController.createNewObra());
 router.delete("/delete-obra/:id", obraController.deleteObra());
 
 // PUT METHODS
-// router.put("/obra/:id", obraController.updateObra());
+router.put("/update-obra", obraController.updateObra());
 
 module.exports = router;
