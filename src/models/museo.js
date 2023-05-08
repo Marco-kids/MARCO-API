@@ -16,6 +16,10 @@ const museoSchema = mongoose.Schema({
     isActive: {
       type: Boolean,
       required: true
+    },
+    imagen: {
+      type: String,
+      required: true
     }
 });
 

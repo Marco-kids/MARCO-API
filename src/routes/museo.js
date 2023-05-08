@@ -1,5 +1,6 @@
 const express = require("express");
 const museoController = require("../controllers/museo");
+const handleImageUpload = require("../middleware/uploadMuseo");
 const router = express.Router();
 
 // GET METHODS
@@ -7,7 +8,7 @@ router.get('/museo', museoController.listMuseo());
 router.get('/museo/active', museoController.getActiveMuseo());
 
 // POST METHODS
-router.post("/museo", museoController.createNewMuseo());
+router.post("/museo", handleImageUpload, museoController.createNewMuseo());
 
 // PUT METHODS
 router.put("/museo/activate/:id", museoController.setActiveMuseo());
