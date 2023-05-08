@@ -1,6 +1,5 @@
 const obra = require("../models/obra.js");
 require("dotenv").config();
-const upload = require("../middleware/upload");
 const mongoose = require("mongoose")
 
 let ctr = {};
