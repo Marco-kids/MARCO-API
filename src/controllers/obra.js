@@ -2,27 +2,21 @@ const obra = require("../models/obra.js");
 require("dotenv").config();
 const upload = require("../middleware/upload");
 const mongoose = require("mongoose")
-const baseUrl = process.env.IP_PC + "/api/models/";
 
 let ctr = {};
 
 // GET all obras
 ctr.getAllObras = () => async (req, res) => {
-  try {
-    const obras = obra.find(function (err, docs) {
-      if (err) {
+    try {
+        const obras = obra.find(function(err, docs) {
+            if (err) {
+                res.status(500).json("Error finding obras")
+            }
+            res.json(docs)
+        })
+    } catch {
         res.status(500).json("Error finding obras")
-      }
-      docs.forEach(function (doc) {
-        doc.modelo = process.env.IP_PC + "/api/models/" + doc.modelo
-      });
-
-      docs.sort((a, b) => a.zona - b.zona);
-      res.json(docs)
-    })
-  } catch {
-    res.status(500).json("Error finding obras")
-  }
+    }
 };
 
 // GET a obra
@@ -119,7 +113,7 @@ ctr.getListModels = () => async (req, res) => {
     await cursor.forEach((doc) => {
       fileInfos.push({
         name: doc.filename,
-        url: baseUrl + doc.filename,
+        url: doc.filename,
       });
     });
 
