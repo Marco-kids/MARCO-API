@@ -30,7 +30,6 @@ function handleImageUpload(req, res, next) {
       console.log(err);
       res.status(400).json({ error: err.message });
     } else {
-      console.log(req.file);
       req.image = req.file;
       next();
     }

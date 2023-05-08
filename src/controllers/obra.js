@@ -40,29 +40,23 @@ ctr.deleteObra = () => async (req, res) => {
 
 ctr.createNewObra = () => async (req, res) => {
 
-  await upload(req, res);
   try {
 
-    const { nombre, autor, descripcion, longitud, latitud, zona } = req.body;
-    const modelo = req.fileName;
+    const { nombre, autor, descripcion } = req.body;
 
-    if (!nombre || !autor || !descripcion || !modelo || !zona) {
-      return res.status(402).json("Empty fields");
-    }
-
-    const newEvent = obra({
+    const newObra = obra({
       nombre: nombre,
       autor: autor,
       descripcion: descripcion,
-      modelo: modelo,
-      zona: zona
+      modelo: req.files.file[0].path,
+      imagen: req.files.imagen[0].path
     })
-    newEvent
-      .save()
-      .then(res.json("Success"))
+    
+    const result = await newObra.save()
+    res.status(201).json(result)
 
-  } catch {
-    return res.status(500).json("Server error");
+  } catch(error) {
+    return res.status(500).json(error.message);
   }
 
 }
