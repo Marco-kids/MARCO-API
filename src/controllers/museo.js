@@ -30,9 +30,10 @@ ctr.createNewMuseo = () => async (req, res) => {
   try {
     const museo = new Museo({
       nombre: req.body.nombre,
-      obras: req.body.obras,
-      locations: req.body.locations,
-      isActive: false
+      obras: JSON.parse(req.body.obras),
+      locations: JSON.parse(req.body.locations),
+      isActive: false,
+      imagen: req.image.path
     })
 
     await museo.save()
